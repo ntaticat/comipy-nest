@@ -16,18 +16,22 @@ import { InteresadosHorariosModule } from './interesados_horarios/interesados_ho
 import { ComentariosModule } from './comentarios/comentarios.module';
 import { ComentariosAlumnosModule } from './comentarios_alumnos/comentarios_alumnos.module';
 import { ComentariosInteresadosModule } from './comentarios_interesados/comentarios_interesados.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'password',
-      database: 'test',
+      host: process.env.DATABASE_HOST,
+      port: parseInt(process.env.DATABASE_PORT, 10),
+      username: process.env.DATABASE_USERNAME,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_NAME,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
+      synchronize: true, // Cambia esto a false en producción
     }),
     AlumnosModule,
     DocentesModule,
