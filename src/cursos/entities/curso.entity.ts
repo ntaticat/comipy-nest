@@ -1,4 +1,5 @@
 import { Horario } from 'src/horarios/entities/horario.entity';
+import { Tema } from 'src/temas/entities/tema.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
@@ -14,4 +15,7 @@ export class Curso {
 
   @OneToMany(() => Horario, (horario) => horario.curso)
   horarios: Horario[];
+
+  @OneToMany(() => Tema, (tema) => tema.curso)
+  temas: Tema[];
 }

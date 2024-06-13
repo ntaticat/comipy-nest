@@ -9,6 +9,7 @@ import { HorariosModule } from './horarios/horarios.module';
 import { DocentesHorariosModule } from './docentes_horarios/docentes_horarios.module';
 import { AlumnosHorariosModule } from './alumnos_horarios/alumnos_horarios.module';
 import { AsistenciasModule } from './asistencias/asistencias.module';
+import { TemasModule } from './temas/temas.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { AsistenciasModule } from './asistencias/asistencias.module';
     DocentesHorariosModule,
     AlumnosHorariosModule,
     AsistenciasModule,
+    TemasModule,
   ],
   controllers: [AppController],
   providers: [AppService],
