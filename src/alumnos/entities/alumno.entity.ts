@@ -1,5 +1,6 @@
 import { AlumnosHorarios } from 'src/alumnos_horarios/entities/alumnos_horarios.entity';
 import { Asistencia } from 'src/asistencias/entities/asistencia.entity';
+import { ComentariosAlumnos } from 'src/comentarios_alumnos/entities/comentarios_alumnos.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
@@ -30,4 +31,10 @@ export class Alumno {
 
   @OneToMany(() => Asistencia, (asistencia) => asistencia.alumno)
   asistencias: Asistencia[];
+
+  @OneToMany(
+    () => ComentariosAlumnos,
+    (comentariosAlumnos) => comentariosAlumnos.alumno,
+  )
+  comentariosAlumnos: ComentariosAlumnos[];
 }

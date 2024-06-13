@@ -1,3 +1,4 @@
+import { ComentariosInteresados } from 'src/comentarios_interesados/entities/comentarios_interesados.entity';
 import { InteresadosHorarios } from 'src/interesados_horarios/entities/interesados_horarios.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
@@ -47,4 +48,10 @@ export class Interesado {
     (interesadosHorarios) => interesadosHorarios.interesado,
   )
   interesadosHorarios: InteresadosHorarios[];
+
+  @OneToMany(
+    () => ComentariosInteresados,
+    (comentariosInteresados) => comentariosInteresados.interesado,
+  )
+  comentariosInteresados: ComentariosInteresados[];
 }

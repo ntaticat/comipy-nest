@@ -13,6 +13,9 @@ import { TemasModule } from './temas/temas.module';
 import { TemasVistosModule } from './temas_vistos/temas_vistos.module';
 import { InteresadosModule } from './interesados/interesados.module';
 import { InteresadosHorariosModule } from './interesados_horarios/interesados_horarios.module';
+import { ComentariosModule } from './comentarios/comentarios.module';
+import { ComentariosAlumnosModule } from './comentarios_alumnos/comentarios_alumnos.module';
+import { ComentariosInteresadosModule } from './comentarios_interesados/comentarios_interesados.module';
 
 @Module({
   imports: [
@@ -37,6 +40,9 @@ import { InteresadosHorariosModule } from './interesados_horarios/interesados_ho
     TemasVistosModule,
     InteresadosModule,
     InteresadosHorariosModule,
+    ComentariosModule,
+    ComentariosAlumnosModule,
+    ComentariosInteresadosModule,
   ],
   controllers: [AppController],
   providers: [AppService],
