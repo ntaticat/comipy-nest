@@ -1,3 +1,4 @@
+import { AlumnosHorarios } from 'src/alumnos_horarios/entities/alumnos_horarios.entity';
 import { Curso } from 'src/cursos/entities/curso.entity';
 import { DocentesHorarios } from 'src/docentes_horarios/entities/docentes_horarios.entity';
 import {
@@ -35,4 +36,10 @@ export class Horario {
     (docentesHorarios) => docentesHorarios.horario,
   )
   docentesHorarios: DocentesHorarios[];
+
+  @OneToMany(
+    () => AlumnosHorarios,
+    (alumnosHorarios) => alumnosHorarios.horario,
+  )
+  alumnosHorarios: AlumnosHorarios[];
 }
