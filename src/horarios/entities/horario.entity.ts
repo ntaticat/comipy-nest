@@ -1,10 +1,12 @@
 import { Curso } from 'src/cursos/entities/curso.entity';
+import { DocentesHorarios } from 'src/docentes_horarios/entities/docentes_horarios.entity';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -27,4 +29,10 @@ export class Horario {
 
   @Column({ type: 'varchar', length: 20 })
   turno: string;
+
+  @OneToMany(
+    () => DocentesHorarios,
+    (docentesHorarios) => docentesHorarios.horario,
+  )
+  docentesHorarios: DocentesHorarios[];
 }

@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { DocentesHorarios } from 'src/docentes_horarios/entities/docentes_horarios.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class Docente {
@@ -31,4 +32,10 @@ export class Docente {
 
   @Column({ type: 'varchar', length: 255, default: 'normal' })
   rol: string;
+
+  @OneToMany(
+    () => DocentesHorarios,
+    (docentesHorarios) => docentesHorarios.docente,
+  )
+  docentesHorarios: DocentesHorarios[];
 }
