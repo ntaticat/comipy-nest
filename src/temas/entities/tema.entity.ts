@@ -1,10 +1,12 @@
 import { Curso } from 'src/cursos/entities/curso.entity';
+import { TemaVisto } from 'src/temas_vistos/entities/temas_visto.entity';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -21,4 +23,7 @@ export class Tema {
 
   @Column({ type: 'text', nullable: true })
   descripcion: string;
+
+  @OneToMany(() => TemaVisto, (temasVistos) => temasVistos.tema)
+  temasVistos: TemaVisto[];
 }

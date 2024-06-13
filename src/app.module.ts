@@ -10,6 +10,7 @@ import { DocentesHorariosModule } from './docentes_horarios/docentes_horarios.mo
 import { AlumnosHorariosModule } from './alumnos_horarios/alumnos_horarios.module';
 import { AsistenciasModule } from './asistencias/asistencias.module';
 import { TemasModule } from './temas/temas.module';
+import { TemasVistosModule } from './temas_vistos/temas_vistos.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { TemasModule } from './temas/temas.module';
     AlumnosHorariosModule,
     AsistenciasModule,
     TemasModule,
+    TemasVistosModule,
   ],
   controllers: [AppController],
   providers: [AppService],
