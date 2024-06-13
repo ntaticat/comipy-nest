@@ -7,6 +7,8 @@ import { DocentesModule } from './docentes/docentes.module';
 import { CursosModule } from './cursos/cursos.module';
 import { HorariosModule } from './horarios/horarios.module';
 import { DocentesHorariosModule } from './docentes_horarios/docentes_horarios.module';
+import { AlumnosHorariosModule } from './alumnos_horarios/alumnos_horarios.module';
+import { AsistenciasModule } from './asistencias/asistencias.module';
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import { DocentesHorariosModule } from './docentes_horarios/docentes_horarios.mo
     CursosModule,
     HorariosModule,
     DocentesHorariosModule,
+    AlumnosHorariosModule,
+    AsistenciasModule,
   ],
   controllers: [AppController],
   providers: [AppService],
