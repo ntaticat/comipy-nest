@@ -2,6 +2,7 @@ import { AlumnosHorarios } from 'src/alumnos_horarios/entities/alumnos_horarios.
 import { Asistencia } from 'src/asistencias/entities/asistencia.entity';
 import { Curso } from 'src/cursos/entities/curso.entity';
 import { DocentesHorarios } from 'src/docentes_horarios/entities/docentes_horarios.entity';
+import { InteresadosHorarios } from 'src/interesados_horarios/entities/interesados_horarios.entity';
 import { TemaVisto } from 'src/temas_vistos/entities/temas_visto.entity';
 import {
   Entity,
@@ -50,4 +51,10 @@ export class Horario {
 
   @OneToMany(() => TemaVisto, (temasVistos) => temasVistos.horario)
   temasVistos: TemaVisto[];
+
+  @OneToMany(
+    () => InteresadosHorarios,
+    (interesadosHorarios) => interesadosHorarios.horario,
+  )
+  interesadosHorarios: InteresadosHorarios[];
 }

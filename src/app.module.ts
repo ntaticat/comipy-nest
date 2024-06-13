@@ -11,6 +11,8 @@ import { AlumnosHorariosModule } from './alumnos_horarios/alumnos_horarios.modul
 import { AsistenciasModule } from './asistencias/asistencias.module';
 import { TemasModule } from './temas/temas.module';
 import { TemasVistosModule } from './temas_vistos/temas_vistos.module';
+import { InteresadosModule } from './interesados/interesados.module';
+import { InteresadosHorariosModule } from './interesados_horarios/interesados_horarios.module';
 
 @Module({
   imports: [
@@ -33,6 +35,8 @@ import { TemasVistosModule } from './temas_vistos/temas_vistos.module';
     AsistenciasModule,
     TemasModule,
     TemasVistosModule,
+    InteresadosModule,
+    InteresadosHorariosModule,
   ],
   controllers: [AppController],
   providers: [AppService],
