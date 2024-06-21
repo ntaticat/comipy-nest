@@ -15,7 +15,10 @@ export class CursosService {
   }
 
   findOne(id: number): Promise<Curso> {
-    return this.cursosRepository.findOneBy({ curso_id: id });
+    return this.cursosRepository.findOne({
+      where: { curso_id: id },
+      relations: ['horarios', 'temas'],
+    });
   }
 
   async remove(id: number): Promise<void> {
