@@ -1,26 +1,60 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { ParticipantesService } from 'src/participantes/participantes.service';
+import { JwtService } from '@nestjs/jwt';
+import { Participante } from 'src/participantes/entities/participante.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+  constructor(
+    private participantsService: ParticipantesService,
+    private jwtService: JwtService,
+  ) {}
+
+  async register(
+    username: string,
+    password: string,
+    phoneNumber: string,
+  ): Promise<Participante> {
+    const hashedPassword = await bcrypt.hash(password, 10); // Encriptar la contraseña
+    const participant = new Participante();
+    participant.username = username;
+    participant.password = hashedPassword;
+    participant.phoneNumber = phoneNumber;
+    return this.participantsService.create(participant);
   }
 
-  findAll() {
-    return `This action returns all auth`;
+  async validateParticipant(
+    phoneNumber: string,
+    password: string,
+  ): Promise<any> {
+    const participant =
+      await this.participantsService.findOneByPhoneNumber(phoneNumber);
+    if (!participant) {
+      throw new NotFoundException('Número de celular no encontrado');
+    }
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      participant.password,
+    );
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Contraseña incorrecta');
+    }
+    const { ...result } = participant;
+    return result;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
-
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+  async login(participant: any) {
+    const payload = {
+      phoneNumber: participant.phoneNumber,
+      sub: participant.id,
+    };
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
   }
 }

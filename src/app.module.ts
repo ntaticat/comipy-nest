@@ -17,6 +17,13 @@ import { ComentariosModule } from './comentarios/comentarios.module';
 import { ComentariosAlumnosModule } from './comentarios_alumnos/comentarios_alumnos.module';
 import { ComentariosInteresadosModule } from './comentarios_interesados/comentarios_interesados.module';
 import { ConfigModule } from '@nestjs/config';
+import { ParticipantesModule } from './participantes/participantes.module';
+import { ColeccionablesModule } from './coleccionables/coleccionables.module';
+import { RetosModule } from './retos/retos.module';
+import { MinijuegosModule } from './minijuegos/minijuegos.module';
+import { AuthModule } from './auth/auth.module';
+import { PreguntasModule } from './preguntas/preguntas.module';
+import { PreguntaOpcionesModule } from './pregunta_opciones/pregunta_opciones.module';
 
 @Module({
   imports: [
@@ -47,6 +54,13 @@ import { ConfigModule } from '@nestjs/config';
     ComentariosModule,
     ComentariosAlumnosModule,
     ComentariosInteresadosModule,
+    ParticipantesModule,
+    ColeccionablesModule,
+    RetosModule,
+    MinijuegosModule,
+    AuthModule,
+    PreguntasModule,
+    PreguntaOpcionesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
