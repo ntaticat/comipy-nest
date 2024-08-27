@@ -11,6 +11,7 @@ async function bootstrap() {
       const whitelist = [
         'http://localhost:4200',
         'https://neocomipy.netlify.app',
+        'https://comipy.netlify.app',
       ];
       if (whitelist.indexOf(origin) !== -1 || !origin) {
         callback(null, true);
