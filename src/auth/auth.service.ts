@@ -19,12 +19,14 @@ export class AuthService {
     username: string,
     password: string,
     phoneNumber: string,
+    role: string = 'user', // Nuevo parámetro para el rol
   ): Promise<Participante> {
     const hashedPassword = await bcrypt.hash(password, 10); // Encriptar la contraseña
     const participant = new Participante();
     participant.username = username;
     participant.password = hashedPassword;
     participant.phoneNumber = phoneNumber;
+    participant.role = role; // Asignar el rol
     return this.participantsService.create(participant);
   }
 
@@ -44,7 +46,7 @@ export class AuthService {
     if (!isPasswordValid) {
       throw new UnauthorizedException('Contraseña incorrecta');
     }
-    const { ...result } = participant;
+    const { ...result } = participant; // Excluir el password del resultado
     return result;
   }
 
@@ -52,6 +54,7 @@ export class AuthService {
     const payload = {
       phoneNumber: participant.phoneNumber,
       sub: participant.id,
+      role: participant.role, // Incluir el rol en el token JWT
     };
     return {
       access_token: this.jwtService.sign(payload),

@@ -1,34 +1,31 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put } from '@nestjs/common';
 import { RetosService } from './retos.service';
 import { CreateRetoDto } from './dto/create-reto.dto';
-import { UpdateRetoDto } from './dto/update-reto.dto';
 
 @Controller('retos')
 export class RetosController {
   constructor(private readonly retosService: RetosService) {}
 
   @Post()
-  create(@Body() createRetoDto: CreateRetoDto) {
+  async createReto(@Body() createRetoDto: CreateRetoDto) {
     return this.retosService.create(createRetoDto);
   }
 
   @Get()
-  findAll() {
+  async getAllRetos() {
     return this.retosService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.retosService.findOne(+id);
+  async getReto(@Param('id') id: number) {
+    return this.retosService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRetoDto: UpdateRetoDto) {
-    return this.retosService.update(+id, updateRetoDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.retosService.remove(+id);
+  @Put(':id')
+  async updateReto(
+    @Param('id') id: number,
+    @Body() updateRetoDto: CreateRetoDto,
+  ) {
+    return this.retosService.update(id, updateRetoDto);
   }
 }

@@ -1,26 +1,37 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateRetoDto } from './dto/create-reto.dto';
-import { UpdateRetoDto } from './dto/update-reto.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Reto } from './entities/reto.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class RetosService {
-  create(createRetoDto: CreateRetoDto) {
-    return 'This action adds a new reto';
+  constructor(
+    @InjectRepository(Reto)
+    private retoRepository: Repository<Reto>,
+  ) {}
+
+  async create(createRetoDto: CreateRetoDto): Promise<Reto> {
+    const reto = this.retoRepository.create(createRetoDto);
+    return this.retoRepository.save(reto);
   }
 
-  findAll() {
-    return `This action returns all retos`;
+  async findOne(id: number): Promise<Reto> {
+    const reto = await this.retoRepository.findOne({
+      where: { id },
+    });
+    if (!reto) {
+      throw new NotFoundException(`Reto with ID ${id} not found`);
+    }
+    return reto;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} reto`;
+  async findAll(): Promise<Reto[]> {
+    return this.retoRepository.find();
   }
 
-  update(id: number, updateRetoDto: UpdateRetoDto) {
-    return `This action updates a #${id} reto`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} reto`;
+  async update(id: number, updateRetoDto: CreateRetoDto): Promise<Reto> {
+    await this.retoRepository.update(id, updateRetoDto);
+    return this.findOne(id);
   }
 }

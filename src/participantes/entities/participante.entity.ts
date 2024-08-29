@@ -23,6 +23,9 @@ export class Participante {
   @Column({ unique: true })
   phoneNumber: string; // Campo para almacenar el número de celular
 
+  @Column({ default: 'usuario' }) // Agregar un campo de rol con valor por defecto 'user'
+  role: string;
+
   @ManyToMany(() => Reto, (challenge) => challenge.participants)
   @JoinTable()
   challenges: Reto[];

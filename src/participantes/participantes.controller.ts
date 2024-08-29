@@ -7,12 +7,15 @@ import {
   UseGuards,
   Request,
   Post,
+  SetMetadata,
 } from '@nestjs/common';
 import { ParticipantesService } from './participantes.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Participante } from './entities/participante.entity';
+import { RolesGuard } from 'src/guards/roles.guard';
 
 @Controller('participantes')
+@UseGuards(RolesGuard)
 export class ParticipantesController {
   constructor(private readonly participantesService: ParticipantesService) {}
 
@@ -35,6 +38,7 @@ export class ParticipantesController {
   // Obtener el perfil del participante actual
   @UseGuards(JwtAuthGuard)
   @Get('profile')
+  @SetMetadata('roles', ['usuario', 'admin'])
   getProfile(@Request() req) {
     return this.participantesService.findOneByPhoneNumber(req.user.phoneNumber);
   }
@@ -42,6 +46,7 @@ export class ParticipantesController {
   // Actualizar el perfil del participante
   @UseGuards(JwtAuthGuard)
   @Patch('profile')
+  // @SetMetadata('roles', ['usuario'])
   updateProfile(@Request() req, @Body() updateData: any) {
     return this.participantesService.update(req.user.id, updateData);
   }
@@ -56,6 +61,7 @@ export class ParticipantesController {
   // Eliminar la cuenta del participante
   @UseGuards(JwtAuthGuard)
   @Delete('profile')
+  @SetMetadata('roles', ['admin'])
   deleteAccount(@Request() req) {
     return this.participantesService.delete(req.user.id);
   }
