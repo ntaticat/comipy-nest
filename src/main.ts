@@ -10,6 +10,7 @@ async function bootstrap() {
     origin: (origin, callback) => {
       const whitelist = [
         'http://localhost:4200',
+        'http://localhost:3000',
         'https://neocomipy.netlify.app',
         'https://comipy.netlify.app',
       ];
