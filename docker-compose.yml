@@ -1,0 +1,14 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: comipynest-mysql
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env
+    volumes:
+      - comipynest-mysql-volume:/var/lib/mysql
+
+volumes:
+  comipynest-mysql-volume:
